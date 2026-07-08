@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">LinkSnap</string>
+    <string name="home_tab">Home</string>
+    <string name="favorites_tab">Favorites</string>
+    <string name="settings_tab">Profile</string>
+    <string name="summarize_now">Summarize Now</string>
+    <string name="paste_url_hint">Paste article URL here...</string>
+    <string name="open_in_browser">Open in Browser</string>
+    <string name="share">Share</string>
+    <string name="clear_cache">Clear Account Cache</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="stats_summarized">Total Links Summarized: %1$d</string>
+    <string name="empty_feed">No links saved yet. Paste a URL to get started!</string>
+    <string name="login_title">The Intelligent Curator</string>
+    <string name="login_subtitle">A quiet, high-end gallery for your digital fragments. AI-powered organization for the modern intellectual.</string>
+    <string name="login_welcome_back">Welcome back</string>
+    <string name="login_sync_msg">Sign in to sync your curated collection</string>
+    <string name="login_continue_google">Continue with Google</string>
+    <string name="feature_ai_title">AI Intelligence</string>
+    <string name="feature_summaries_title">Summaries that respect your time.</string>
+    <string name="feature_summaries_desc">Our neural engine distills long-form content into elegant briefings, preserving the core intellectual value.</string>
+    <string name="feature_reading_mode">Quiet Reading Mode</string>
+    <string name="feature_reading_desc">A distraction-free environment designed for deep focus and long-form comprehension.</string>
+    <string name="feature_semantic_sorting">Semantic Sorting</string>
+    <string name="feature_semantic_desc">Links are automatically categorized using natural language understanding, not just keywords.</string>
+    <string name="search_knowledge_hint">Search your knowledge base...</string>
+    <string name="app_logout">Sign Out</string>
+    <string name="no_favorites">Your curated favorites will appear here.</string>
+    <string name="add_link_header">Add New Link</string>
+</resources>
