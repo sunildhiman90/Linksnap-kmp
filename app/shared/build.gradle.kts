@@ -138,7 +138,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.appcompat)
             implementation(libs.androidx.activity.compose)
-            implementation(libs.koin.android)
+            api(libs.koin.android)
         }
 
         iosMain.dependencies {
