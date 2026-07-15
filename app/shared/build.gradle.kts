@@ -110,6 +110,7 @@ kotlin {
             // Settings
             implementation(libs.multiplatform.settings)
             implementation(libs.multiplatform.settings.serialization)
+            implementation(libs.multiplatform.settings.no.arg)
 
             // Koin
             api(libs.koin.core)

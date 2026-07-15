@@ -1,6 +1,12 @@
 package app.linksnap.di
 
+import app.linksnap.features.auth.data.AuthRepository
+import app.linksnap.features.auth.data.AuthRepositoryImpl
+import app.linksnap.features.auth.data.SessionManager
+import app.linksnap.features.home.data.LinkRepository
+import app.linksnap.features.home.data.LinkRepositoryImpl
 import app.linksnapkmp.BuildKonfig
+import com.russhwolf.settings.Settings
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -50,5 +56,11 @@ fun commonModule() = module {
         }
     }
 
+    single<Settings> { Settings() }
+    single { SessionManager(get(), get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get(), get()) }
+    single<LinkRepository> { LinkRepositoryImpl(get(), get()) }
+
+    
 
 }

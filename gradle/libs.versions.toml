@@ -112,6 +112,7 @@ kmauth-google = { module = "io.github.sunildhiman90:kmauth-google", version.ref 
 kmauth-google-compose = { module = "io.github.sunildhiman90:kmauth-google-compose", version.ref = "kmauth" }
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatform-settings" }
 multiplatform-settings-serialization = { module = "com.russhwolf:multiplatform-settings-serialization", version.ref = "multiplatform-settings" }
+multiplatform-settings-no-arg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatform-settings" }
 
 # Icons
 compose-materialIconsCore = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "composeIcons" }
