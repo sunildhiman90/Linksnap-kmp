@@ -28,7 +28,7 @@ fun commonModule() = module {
         }
     }
 
-    single {
+    single<HttpClient> {
         HttpClient(get()) {
             install(ContentNegotiation) {
                 json(get())

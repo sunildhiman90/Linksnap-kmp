@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		10CDDDA230094FA5008E96E4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 10CDDDA130094FA5008E96E4 /* GoogleSignIn */; };
+		10CDDDA430094FA5008E96E4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10CDDDA330094FA5008E96E4 /* GoogleSignInSwift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		4F09F6249C934C48CF5CA78F /* Linksnap-kmp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Linksnap-kmp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F09F6249C934C48CF5CA78F /* Linksnap-kmp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Linksnap-kmp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -41,12 +46,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10CDDDA230094FA5008E96E4 /* GoogleSignIn in Frameworks */,
+				10CDDDA430094FA5008E96E4 /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3071ADCD668AF22EB05C3EB8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F09F6249C934C48CF5CA78F /* Linksnap-kmp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A713D0FC7C6D635FFE2465EA = {
 			isa = PBXGroup;
 			children = (
@@ -54,14 +69,6 @@
 				120FC26742B4BFC0A48039DC /* iosApp */,
 				3071ADCD668AF22EB05C3EB8 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		3071ADCD668AF22EB05C3EB8 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4F09F6249C934C48CF5CA78F /* Linksnap-kmp.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +92,8 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
+				10CDDDA130094FA5008E96E4 /* GoogleSignIn */,
+				10CDDDA330094FA5008E96E4 /* GoogleSignInSwift */,
 			);
 			productName = iosApp;
 			productReference = 4F09F6249C934C48CF5CA78F /* Linksnap-kmp.app */;
@@ -114,6 +123,9 @@
 			);
 			mainGroup = A713D0FC7C6D635FFE2465EA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				10CDDDA030094FA5008E96E4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3071ADCD668AF22EB05C3EB8 /* Products */;
 			projectDirPath = "";
@@ -290,34 +302,6 @@
 			};
 			name = Release;
 		};
-		B9841A2B942B0C86202A8FB6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = arm64;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "${TEAM_ID}";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 		824C7101ADC2C1080D961898 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -346,18 +330,37 @@
 			};
 			name = Release;
 		};
+		B9841A2B942B0C86202A8FB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = "${TEAM_ID}";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		753326A1057D4B6BB18CA38F /* Build configuration list for PBXProject "iosApp" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3A410F25AE470B1B14E6D32D /* Debug */,
-				6145DAB756B526ED6C21F8B7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		16914C92817EE15202116A14 /* Build configuration list for PBXNativeTarget "iosApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -367,7 +370,40 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		753326A1057D4B6BB18CA38F /* Build configuration list for PBXProject "iosApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A410F25AE470B1B14E6D32D /* Debug */,
+				6145DAB756B526ED6C21F8B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		10CDDDA030094FA5008E96E4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		10CDDDA130094FA5008E96E4 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10CDDDA030094FA5008E96E4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		10CDDDA330094FA5008E96E4 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10CDDDA030094FA5008E96E4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6E34CDBACD9E657746D10E17 /* Project object */;
 }

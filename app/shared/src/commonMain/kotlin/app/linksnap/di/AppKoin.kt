@@ -18,5 +18,5 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     )
 
     appDeclaration()
-    modules(commonModule())
+    modules(commonModule(),viewModelModule(),platformModule())
 }

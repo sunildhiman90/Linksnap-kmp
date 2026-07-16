@@ -10,6 +10,8 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 interface AuthRepository {
 
@@ -34,33 +36,36 @@ class AuthRepositoryImpl(
         profilePicUrl: String?
     ): NetworkResult<AuthResponse> {
 
-        return try {
-            val apiResponse: NetworkResponse<AuthResponse> = httpClient.post("api/auth/google") {
-                contentType(ContentType.Application.Json)
-                setBody(
-                    AuthRequest(
-                        idToken = idToken,
-                        email = email,
-                        name = name,
-                        profilePicUrl = profilePicUrl
-                    )
-                )
-            }.body()
+        return withContext(Dispatchers.Default) {
+            try {
+                val apiResponse: NetworkResponse<AuthResponse> =
+                    httpClient.post("api/auth/google") {
+                        contentType(ContentType.Application.Json)
+                        setBody(
+                            AuthRequest(
+                                idToken = idToken,
+                                email = email,
+                                name = name,
+                                profilePicUrl = profilePicUrl
+                            )
+                        )
+                    }.body()
 
-            val data = apiResponse.data
-            val result = if (data != null) {
-                NetworkResult.Success(data)
-            } else {
-                NetworkResult.Error(apiResponse.message ?: "Auth failed")
+                val data = apiResponse.data
+                val result = if (data != null) {
+                    NetworkResult.Success(data)
+                } else {
+                    NetworkResult.Error(apiResponse.message ?: "Auth failed")
+                }
+
+                if (result is NetworkResult.Success) {
+                    sessionManager.saveSession(result.data.token, result.data.user)
+                }
+                result
+            } catch (e: Exception) {
+
+                NetworkResult.Error(e.message ?: "Something went wrong")
             }
-
-            if (result is NetworkResult.Success) {
-                sessionManager.saveSession(result.data.token, result.data.user)
-            }
-            result
-        } catch (e: Exception) {
-
-            NetworkResult.Error(e.message ?: "Something went wrong")
         }
     }
 

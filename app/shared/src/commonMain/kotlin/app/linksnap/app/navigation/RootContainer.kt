@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
@@ -19,15 +20,20 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import app.linksnap.app.components.AppBottomBar
+import app.linksnap.features.auth.presentation.AuthViewModel
+import app.linksnap.features.auth.presentation.LoginScreen
+import org.koin.compose.viewmodel.koinViewModel
 
 
 @Composable
 fun RootContainer(
     navController: NavHostController,
+    authViewModel: AuthViewModel = koinViewModel()
 ) {
 
+    val authState = authViewModel.state.collectAsStateWithLifecycle()
 
-    val startDestination = RootScreen.Auth
+    val startDestination = if (authState.value.isLoggedIn) RootScreen.Main else RootScreen.Auth
 
     NavHost(
         navController = navController,
@@ -37,12 +43,10 @@ fun RootContainer(
 
         composable<RootScreen.Auth> {
 
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text("Auth")
-            }
+            LoginScreen(
+                state = authState.value,
+                onEvent = authViewModel::onEvent
+            )
 
         }
 
