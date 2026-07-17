@@ -163,6 +163,7 @@ fun AuthCard(
             Text(
                 stringResource(Res.string.login_welcome_back),
                 style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
             )
 
@@ -253,14 +254,17 @@ fun Footer() {
             Text(
                 "Privacy Policy",
                 style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onBackground,
             )
             Text(
                 "Terms of Service",
                 style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onBackground,
             )
             Text(
                 "Contact",
                 style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onBackground,
             )
         }
 

@@ -13,7 +13,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
         KMAuthConfig.forGoogle(
             webClientId = BuildKonfig.WEB_CLIENT_ID,
             clientSecret = BuildKonfig.WEB_CLIENT_SECRET,
-            googleClientRedirectHost = "localhost:8080"
+            googleClientRedirectHost = "localhost:8081"
         )
     )
 
