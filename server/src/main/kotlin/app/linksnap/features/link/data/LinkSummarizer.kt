@@ -31,7 +31,7 @@ object LinkSummarizer {
         }
 
         val title = doc?.title() ?: "No Title"
-        val imageUrl = doc?.select("meta[property=org:image]")?.attr("content")?.takeIf {
+        val imageUrl = doc?.select("meta[property=og:image]")?.attr("content")?.takeIf {
             it.isNotBlank()
         }
         val bodyText =  doc?.body()?.text()?.take(5000) ?: ""

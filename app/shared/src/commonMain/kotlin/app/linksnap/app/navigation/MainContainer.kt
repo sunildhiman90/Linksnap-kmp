@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHost
 import androidx.navigation.compose.NavHost
@@ -17,6 +18,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import app.linksnap.app.components.AppBottomBar
+import app.linksnap.features.home.presentation.HomeScreen
+import app.linksnap.features.home.presentation.HomeViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 
 @Composable
@@ -58,10 +62,18 @@ fun MainContainer(
         ) {
 
             composable<MainScreen.Home> {
+                val viewModel = koinViewModel<HomeViewModel>()
 
-                Column {
-                    Text("Home")
-                }
+                val state = viewModel.state.collectAsStateWithLifecycle()
+
+                HomeScreen(
+                    state = state.value,
+                    onEvent = viewModel::onEvent,
+                    bottomPadding = paddingValues.calculateBottomPadding(),
+                    onLinkClick = {
+
+                    },
+                )
 
             }
 

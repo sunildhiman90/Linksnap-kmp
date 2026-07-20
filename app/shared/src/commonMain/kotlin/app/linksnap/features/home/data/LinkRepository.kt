@@ -15,10 +15,15 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.withContext
 
 interface LinkRepository {
+
+    val refreshEvents: SharedFlow<Unit>
 
     suspend fun summarizeLink(url: String): NetworkResult<LinkSummary>
     suspend fun getLinks(): NetworkResult<List<LinkSummary>>
@@ -35,7 +40,7 @@ class LinkRepositoryImpl(
 ) : LinkRepository {
 
     private val _refreshEvents = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
-    val refreshEvents = _refreshEvents.asSharedFlow()
+    override val refreshEvents = _refreshEvents.asSharedFlow()
 
     private fun HttpRequestBuilder.authHeader() {
         sessionManager.token.value?.let {
@@ -45,16 +50,18 @@ class LinkRepositoryImpl(
 
     override suspend fun summarizeLink(url: String): NetworkResult<LinkSummary> {
         return try {
-            val apiRes = client.post("api/summarize") {
-                authHeader()
-                contentType(ContentType.Application.Json)
-                setBody(SummarizeRequest(url))
-            }.body<NetworkResponse<LinkSummary>>()
-            if (apiRes.data != null) {
-                _refreshEvents.tryEmit(Unit)
-                NetworkResult.Success(apiRes.data!!)
-            } else {
-                NetworkResult.Error(apiRes.message ?: "some error in summarizeLink")
+            withContext(Dispatchers.Default) {
+                val apiRes = client.post("api/summarize") {
+                    authHeader()
+                    contentType(ContentType.Application.Json)
+                    setBody(SummarizeRequest(url))
+                }.body<NetworkResponse<LinkSummary>>()
+                if (apiRes.data != null) {
+                    _refreshEvents.tryEmit(Unit)
+                    NetworkResult.Success(apiRes.data!!)
+                } else {
+                    NetworkResult.Error(apiRes.message ?: "some error in summarizeLink")
+                }
             }
         } catch (e: Exception) {
             NetworkResult.Error(e.message ?: "some error in summarizeLink")
@@ -63,16 +70,17 @@ class LinkRepositoryImpl(
 
     override suspend fun getLinks(): NetworkResult<List<LinkSummary>> {
         return try {
-            val apiRes = client.get("api/links") {
-                authHeader()
-            }.body<NetworkResponse<List<LinkSummary>>>()
+            withContext(Dispatchers.Default) {
+                val apiRes = client.get("api/links") {
+                    authHeader()
+                }.body<NetworkResponse<List<LinkSummary>>>()
 
-            if (apiRes.data != null) {
-                NetworkResult.Success(apiRes.data!!)
-            } else {
-                NetworkResult.Error(apiRes.message ?: "some error in getLinks")
+                if (apiRes.data != null) {
+                    NetworkResult.Success(apiRes.data!!)
+                } else {
+                    NetworkResult.Error(apiRes.message ?: "some error in getLinks")
+                }
             }
-
         } catch (e: Exception) {
             NetworkResult.Error(e.message ?: "some error in getLinks")
         }
@@ -80,16 +88,19 @@ class LinkRepositoryImpl(
 
     override suspend fun getFavorites(): NetworkResult<List<LinkSummary>> {
         return try {
-            val apiRes = client.get("api/links/favorites") {
-                authHeader()
-            }.body<NetworkResponse<List<LinkSummary>>>()
+            withContext(Dispatchers.Default) {
 
-            if (apiRes.data != null) {
-                NetworkResult.Success(apiRes.data!!)
-            } else {
-                NetworkResult.Error(apiRes.message ?: "some error in getFavorites")
+                val apiRes = client.get("api/links/favorites") {
+                    authHeader()
+                }.body<NetworkResponse<List<LinkSummary>>>()
+
+                if (apiRes.data != null) {
+                    NetworkResult.Success(apiRes.data!!)
+                } else {
+                    NetworkResult.Error(apiRes.message ?: "some error in getFavorites")
+                }
+
             }
-
         } catch (e: Exception) {
             NetworkResult.Error(e.message ?: "some error in getFavorites")
         }
@@ -97,6 +108,8 @@ class LinkRepositoryImpl(
 
     override suspend fun toggleFavorite(linkId: String): NetworkResult<Boolean> {
         return try {
+            withContext(Dispatchers.Default) {
+
             val apiRes = client.post("api/links/$linkId/favorites") {
                 authHeader()
             }.body<NetworkResponse<Boolean>>()
@@ -106,6 +119,7 @@ class LinkRepositoryImpl(
             } else {
                 NetworkResult.Error(apiRes.message ?: "some error in toggleFavorite")
             }
+                }
 
         } catch (e: Exception) {
             NetworkResult.Error(e.message ?: "some error in toggleFavorite")
@@ -114,14 +128,17 @@ class LinkRepositoryImpl(
 
     override suspend fun markAsRead(linkId: String): NetworkResult<Boolean> {
         return try {
-            val apiRes = client.post("api/links/$linkId/read") {
-                authHeader()
-            }.body<NetworkResponse<Boolean>>()
-            if (apiRes.data != null) {
-                _refreshEvents.tryEmit(Unit)
-                NetworkResult.Success(apiRes.data!!)
-            } else {
-                NetworkResult.Error(apiRes.message ?: "some error in markAsRead")
+            withContext(Dispatchers.Default) {
+
+                val apiRes = client.post("api/links/$linkId/read") {
+                    authHeader()
+                }.body<NetworkResponse<Boolean>>()
+                if (apiRes.data != null) {
+                    _refreshEvents.tryEmit(Unit)
+                    NetworkResult.Success(apiRes.data!!)
+                } else {
+                    NetworkResult.Error(apiRes.message ?: "some error in markAsRead")
+                }
             }
         } catch (e: Exception) {
             NetworkResult.Error(e.message ?: "some error in markAsRead")
@@ -130,13 +147,16 @@ class LinkRepositoryImpl(
 
     override suspend fun getUserStats(): NetworkResult<Int> {
         return try {
-            val apiRes = client.get("api/user/stats") {
-                authHeader()
-            }.body<NetworkResponse<Int>>()
-            if (apiRes.data != null) {
-                NetworkResult.Success(apiRes.data!!)
-            } else {
-                NetworkResult.Error(apiRes.message ?: "some error in getUserStats")
+            withContext(Dispatchers.Default) {
+
+                val apiRes = client.get("api/user/stats") {
+                    authHeader()
+                }.body<NetworkResponse<Int>>()
+                if (apiRes.data != null) {
+                    NetworkResult.Success(apiRes.data!!)
+                } else {
+                    NetworkResult.Error(apiRes.message ?: "some error in getUserStats")
+                }
             }
         } catch (e: Exception) {
             NetworkResult.Error(e.message ?: "some error in getUserStats")

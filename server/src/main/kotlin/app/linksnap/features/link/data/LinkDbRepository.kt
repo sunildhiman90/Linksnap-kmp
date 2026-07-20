@@ -49,7 +49,7 @@ class LinkDbRepositoryImpl : LinkDbRepository {
             it[id] = newId
             it[LinksTable.userId] = userId
             it[originalUrl] = url
-            it[title] = title
+            it[LinksTable.title] = summaryTitle
             it[imageUrl] = summaryImageUrl
             it[LinksTable.aiSummary] = aiSummaryText
             it[category] = categoryName
