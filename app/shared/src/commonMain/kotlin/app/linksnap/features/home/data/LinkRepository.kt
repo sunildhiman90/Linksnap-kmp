@@ -27,6 +27,8 @@ interface LinkRepository {
 
     suspend fun summarizeLink(url: String): NetworkResult<LinkSummary>
     suspend fun getLinks(): NetworkResult<List<LinkSummary>>
+
+    suspend fun getLinkDetail(id: String): NetworkResult<LinkSummary>
     suspend fun getFavorites(): NetworkResult<List<LinkSummary>>
     suspend fun toggleFavorite(linkId: String): NetworkResult<Boolean>
     suspend fun markAsRead(linkId: String): NetworkResult<Boolean>
@@ -106,11 +108,30 @@ class LinkRepositoryImpl(
         }
     }
 
+
+    override suspend fun getLinkDetail(id: String): NetworkResult<LinkSummary> {
+        return try {
+            withContext(Dispatchers.Default) {
+                val apiRes = client.get("api/links/$id") {
+                    authHeader()
+                }.body<NetworkResponse<LinkSummary>>()
+
+                if (apiRes.data != null) {
+                    NetworkResult.Success(apiRes.data!!)
+                } else {
+                    NetworkResult.Error(apiRes.message ?: "some error in getLink detail")
+                }
+            }
+        } catch (e: Exception) {
+            NetworkResult.Error(e.message ?: "some error in getLink detail")
+        }
+    }
+
     override suspend fun toggleFavorite(linkId: String): NetworkResult<Boolean> {
         return try {
             withContext(Dispatchers.Default) {
 
-            val apiRes = client.post("api/links/$linkId/favorites") {
+            val apiRes = client.post("api/links/$linkId/favorite") {
                 authHeader()
             }.body<NetworkResponse<Boolean>>()
             if (apiRes.data != null) {

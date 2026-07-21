@@ -70,11 +70,8 @@ fun MainContainer(
                     state = state.value,
                     onEvent = viewModel::onEvent,
                     bottomPadding = paddingValues.calculateBottomPadding(),
-                    onLinkClick = {
-
-                    },
+                    onLinkClick = onNavigateToDetail,
                 )
-
             }
 
             composable<MainScreen.Favorites> {

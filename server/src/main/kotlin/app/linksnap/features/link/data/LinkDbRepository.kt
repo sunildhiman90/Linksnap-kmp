@@ -26,6 +26,9 @@ interface LinkDbRepository {
     ): LinkSummary
 
     suspend fun getLinks(userId: String): List<LinkSummary>
+
+    suspend fun getLinkDetail(linkId: String, userId: String): LinkSummary
+
     suspend fun getFavorites(userId: String): List<LinkSummary>
     suspend fun toggleFavorite(userId: String, linkId: String): Boolean
     suspend fun markAsRead(userId: String, linkId: String): Boolean
@@ -80,6 +83,14 @@ class LinkDbRepositoryImpl : LinkDbRepository {
             .map {
                 it.toLinkSummary()
             }
+    }
+
+    override suspend fun getLinkDetail(linkId: String, userId: String): LinkSummary {
+        return dbQuery {
+            LinksTable.selectAll().where {
+                (LinksTable.userId eq userId) and (LinksTable.id eq linkId)
+            }.single().toLinkSummary()
+        }
     }
 
     override suspend fun getFavorites(userId: String): List<LinkSummary> = dbQuery {

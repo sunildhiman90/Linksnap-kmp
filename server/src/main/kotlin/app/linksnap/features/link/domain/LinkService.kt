@@ -15,6 +15,11 @@ interface LinkService {
         userId: String
     ): List<LinkSummary>
 
+    suspend fun getLinkDetail(
+        linkId: String,
+        userId: String,
+    ): LinkSummary
+
 
     suspend fun getUserFavorites(
         userId: String
@@ -67,6 +72,10 @@ class LinkServiceImpl(
 
     override suspend fun getUserFavorites(userId: String): List<LinkSummary> {
         return repo.getFavorites(userId)
+    }
+
+    override suspend fun getLinkDetail(linkId: String, userId: String): LinkSummary {
+        return repo.getLinkDetail(linkId, userId)
     }
 
     override suspend fun toggleFavorite(

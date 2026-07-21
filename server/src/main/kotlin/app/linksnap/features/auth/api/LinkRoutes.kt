@@ -77,6 +77,33 @@ fun Route.linkRoutes() {
 
         }
 
+        get("/api/links/{id}") {
+
+            val principle = call.principal<JwtConfig.JWTPrincipal>()!!
+            val linkId = call.parameters["id"] ?: return@get call.respond(HttpStatusCode.BadRequest)
+
+
+            try {
+                call.respond(
+                    NetworkResponse(
+                        linkService.getLinkDetail(linkId, principle.userId)
+                    )
+                )
+
+            } catch (e: Exception) {
+
+                call.respond(
+                    HttpStatusCode.InternalServerError,
+                    NetworkResponse(
+                        e.message
+                    )
+                )
+
+            }
+
+
+        }
+
         get("/api/links/favorite") {
 
             val principle = call.principal<JwtConfig.JWTPrincipal>()!!
