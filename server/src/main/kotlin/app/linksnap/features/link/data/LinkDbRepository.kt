@@ -161,6 +161,7 @@ fun ResultRow.toLinkSummary(): LinkSummary {
         bodySnippet = this[LinksTable.bodySnippet],
         tags = this[LinksTable.tags],
         lastReadAt = this[LinksTable.lastReadAt],
+        isFavorite = this[LinksTable.isFavorite],
         createdAt = this[LinksTable.createdAt].toInstant(TimeZone.currentSystemDefault())
             .toEpochMilliseconds()
     )

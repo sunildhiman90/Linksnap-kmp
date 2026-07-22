@@ -92,7 +92,7 @@ class LinkRepositoryImpl(
         return try {
             withContext(Dispatchers.Default) {
 
-                val apiRes = client.get("api/links/favorites") {
+                val apiRes = client.get("api/links/favorite") {
                     authHeader()
                 }.body<NetworkResponse<List<LinkSummary>>>()
 

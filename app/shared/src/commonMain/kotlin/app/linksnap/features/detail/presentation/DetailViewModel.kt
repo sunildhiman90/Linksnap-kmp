@@ -76,7 +76,7 @@ class DetailViewModel(
                 _state.update {
                     it.copy(
                         link = it.link?.copy(
-                            isFavorite = result.data
+                            isFavorite = !it.link.isFavorite
                         )
                     )
                 }

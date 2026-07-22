@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -18,6 +19,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import app.linksnap.app.components.AppBottomBar
+import app.linksnap.features.favorites.presentation.FavoritesEvent
+import app.linksnap.features.favorites.presentation.FavoritesScreen
+import app.linksnap.features.favorites.presentation.FavoritesViewModel
 import app.linksnap.features.home.presentation.HomeScreen
 import app.linksnap.features.home.presentation.HomeViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -75,9 +79,17 @@ fun MainContainer(
             }
 
             composable<MainScreen.Favorites> {
-                Column {
-                    Text("Fav")
-                }
+
+                val viewModel = koinViewModel<FavoritesViewModel>()
+
+                val state = viewModel.state.collectAsStateWithLifecycle()
+
+                FavoritesScreen(
+                    state = state.value,
+                    onEvent = viewModel::onEvent,
+                    bottomPadding = paddingValues.calculateBottomPadding(),
+                    onLinkClick = onNavigateToDetail,
+                )
             }
 
             composable<MainScreen.Profile> {

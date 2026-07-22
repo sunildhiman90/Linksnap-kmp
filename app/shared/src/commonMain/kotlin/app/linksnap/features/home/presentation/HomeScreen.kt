@@ -181,7 +181,7 @@ fun HomeScreen(
                         top = AppDimensions.paddingMedium,
                         bottom = 100.dp,
                     ),
-                    verticalArrangement = Arrangement.spacedBy(AppDimensions.paddingHero)
+                    verticalArrangement = Arrangement.spacedBy(AppDimensions.paddingLarge)
                 ) {
 
                     items(filteredLinks, key = {
