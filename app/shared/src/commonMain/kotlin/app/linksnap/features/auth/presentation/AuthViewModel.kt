@@ -85,7 +85,8 @@ class AuthViewModel(
                 is NetworkResult.Error -> {
                     _state.update {
                         it.copy(
-                            isLoading = false, error = result.message
+                            isLoading = false, error = result.message,
+                            isLoggedIn = false,
                         )
                     }
                 }

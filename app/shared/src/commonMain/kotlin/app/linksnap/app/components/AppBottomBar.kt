@@ -56,7 +56,7 @@ fun AppBottomBar(
             BottomNavItem(
                 icon = Icons.Default.Home,
                 label = "Home",
-                isSelected = currentRoute?.contains("home") == true,
+                isSelected = currentRoute?.contains("Home") == true,
                 onClick = { onNavigate(MainScreen.Home) }
             )
 

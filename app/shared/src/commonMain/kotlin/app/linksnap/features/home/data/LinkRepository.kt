@@ -170,7 +170,7 @@ class LinkRepositoryImpl(
         return try {
             withContext(Dispatchers.Default) {
 
-                val apiRes = client.get("api/user/stats") {
+                val apiRes = client.get("api/links/stats") {
                     authHeader()
                 }.body<NetworkResponse<Int>>()
                 if (apiRes.data != null) {

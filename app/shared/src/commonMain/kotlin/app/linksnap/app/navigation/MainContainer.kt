@@ -24,6 +24,8 @@ import app.linksnap.features.favorites.presentation.FavoritesScreen
 import app.linksnap.features.favorites.presentation.FavoritesViewModel
 import app.linksnap.features.home.presentation.HomeScreen
 import app.linksnap.features.home.presentation.HomeViewModel
+import app.linksnap.features.profile.presentation.ProfileScreen
+import app.linksnap.features.profile.presentation.ProfileViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 
@@ -93,9 +95,24 @@ fun MainContainer(
             }
 
             composable<MainScreen.Profile> {
-                Column {
-                    Text("Profile")
+                val viewModel = koinViewModel<ProfileViewModel>()
+
+                val state = viewModel.state.collectAsStateWithLifecycle()
+
+
+                LaunchedEffect(state.value.isLoggedOut) {
+                    if (state.value.isLoggedOut) {
+                        onLogout()
+                    }
                 }
+
+                ProfileScreen(
+                    state = state.value,
+                    onEvent = viewModel::onEvent,
+                    bottomPadding = paddingValues.calculateBottomPadding(),
+                    onNavigateToDetail = onNavigateToDetail,
+                )
+
             }
 
         }

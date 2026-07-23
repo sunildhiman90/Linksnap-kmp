@@ -22,6 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import app.linksnap.app.components.AppBottomBar
+import app.linksnap.features.auth.presentation.AuthEvent
 import app.linksnap.features.auth.presentation.AuthViewModel
 import app.linksnap.features.auth.presentation.LoginScreen
 import app.linksnap.features.detail.presentation.DetailEvent
@@ -62,6 +63,8 @@ fun RootContainer(
                 },
                 onLogout = {
                     navController.navigate(RootScreen.Auth) {
+
+                        authViewModel.onEvent(AuthEvent.Logout)
                         popUpTo(navController.graph.findStartDestination().id) {
                             inclusive = true
                         }

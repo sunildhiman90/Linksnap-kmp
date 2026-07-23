@@ -4,6 +4,7 @@ import app.linksnap.features.auth.presentation.AuthViewModel
 import app.linksnap.features.detail.presentation.DetailViewModel
 import app.linksnap.features.favorites.presentation.FavoritesViewModel
 import app.linksnap.features.home.presentation.HomeViewModel
+import app.linksnap.features.profile.presentation.ProfileViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -15,4 +16,5 @@ fun viewModelModule()  = module {
     viewModel { HomeViewModel(get()) }
     viewModel { DetailViewModel(get()) }
     viewModel { FavoritesViewModel(get()) }
+    viewModel { ProfileViewModel(get(), get(), get()) }
 }
