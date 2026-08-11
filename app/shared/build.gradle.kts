@@ -30,7 +30,8 @@ buildkonfig {
         buildConfigField(
             com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING,
             "BASE_URL",
-            "http://192.168.1.6:8080/"
+            System.getenv("BASE_URL")
+                ?: localProperties["BASE_URL"].toString()
         )
         buildConfigField(
             com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING,

@@ -95,7 +95,7 @@ fun ProfileScreen(
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = AppDimensions.paddingLarge),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
 
             Surface(
@@ -179,11 +179,8 @@ fun ProfileScreen(
                     }
                 }
 
-
             }
 
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             //stats card
             Surface(
