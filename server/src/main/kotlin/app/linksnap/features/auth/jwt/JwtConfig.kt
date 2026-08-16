@@ -13,7 +13,7 @@ object JwtConfig {
     private const val SECRET = "linksnap_secret"
     private const val ISSUER = "linksnap"
     private const val AUDIENCE = "linksnap_audience"
-    private const val VALIDITY_MS = 3600000 * 24 * 30 // 30 days
+    private const val VALIDITY_MS = 3600000L * 24 * 30 // 30 days
 
     val algorithm = Algorithm.HMAC256(SECRET)
 
